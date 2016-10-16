@@ -1,6 +1,6 @@
-from flask import Flask, Response, render_template
+import serial
 
-from position_rotation import get_position, get_rotation
+from flask import Flask, Response, render_template
 
 import gevent
 import gevent.monkey
@@ -10,11 +10,18 @@ gevent.monkey.patch_all()
 app = Flask(__name__)
 
 
+def verlet(r, v, dt, a):
+    r_new = r + v * dt + a(r) * dt ** 2 / 2
+    v_new = v + (a(r) + a(r_new)) / 2 * dt
+    return (r_new, v_new)
+
+
 def event_stream():
     while True:
-        gevent.sleep(1/30)
-        yield 'data: %s\n\n' %\
-            {'position': get_position(), 'rotation': get_rotation()}
+        # gevent.sleep(float(1) / 30)
+        ser = serial.Serial('/dev/ttyACM0', 9600)
+        data = eval(ser.readline())
+        yield 'data: %s\n\n' % data
 
 
 @app.route('/stream')
