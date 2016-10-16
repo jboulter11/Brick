@@ -21,7 +21,7 @@ def sse_request():
 
 @app.route('/')
 def page():
-    return render_template('index.html')
+    return render_template('sse.html')
 
 
 if __name__ == '__main__':
