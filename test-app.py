@@ -1,7 +1,5 @@
 from flask import Flask, Response, render_template
 
-from position_rotation import get_position, get_rotation
-
 import gevent
 import gevent.monkey
 from gevent.pywsgi import WSGIServer
@@ -12,6 +10,7 @@ app = Flask(__name__)
 
 def event_stream():
     while True:
+        gevent.sleep(1)
         yield 'data: %s\n\n' % 0
 
 
