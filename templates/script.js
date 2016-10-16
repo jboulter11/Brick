@@ -2,7 +2,7 @@ var xAngle = 0, yAngle = 0;
 console.log("Initilized");
 
 if (!!window.EventSource) {
-  var source = new EventSource('../stream');
+  var source = new EventSource('/stream');
 } else {
   // Result to xhr polling :(
 }
