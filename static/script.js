@@ -6,10 +6,20 @@ if (!!window.EventSource) {
 } else {
   // Result to xhr polling :(
 }
+var absX = 0;
+var absY = 0;
+var absZ = 0;
 
 source.addEventListener('message', function(e) {
   var data = JSON.parse(e.data);
   console.log(data.id, data.msg);
+  //console.log(e.data);
+
+  absX += 5;
+  absY += 5;
+  absZ += 5;
+  // document.getElementById('house').style.transform = "rotateX(" + xAngle + "deg) rotateY("+yAngle+"deg)";
+  document.getElementById('house').style.transform = "translate3d(" + absX + "px, "+ absY + "px, " + absZ + "px)";
 }, false);
 
 source.addEventListener('open', function(e) {
