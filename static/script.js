@@ -9,17 +9,18 @@ if (!!window.EventSource) {
 var absX = 0;
 var absY = 0;
 var absZ = 0;
+var rotX = 0;
+var rotY = 0;
+var rotZ = 0;
 
 source.addEventListener('message', function(e) {
+  console.log(e.data);
   var data = JSON.parse(e.data);
   console.log(data.id, data.msg);
-  //console.log(e.data);
+  absX += data['Accel']['x'] * 5;
+  absZ += data['Accel']['y'] * 3;
 
-  absX += 5;
-  absY += 5;
-  absZ += 5;
-  // document.getElementById('house').style.transform = "rotateX(" + xAngle + "deg) rotateY("+yAngle+"deg)";
-  document.getElementById('house').style.transform = "translate3d(" + absX + "px, "+ absY + "px, " + absZ + "px)";
+  document.getElementById('house').style.transform = " translate3d(" + absX + "px, "+ absY + "px, " + absZ + "px)";
 }, false);
 
 source.addEventListener('open', function(e) {

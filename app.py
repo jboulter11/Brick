@@ -20,7 +20,7 @@ def event_stream():
     while True:
         # gevent.sleep(float(1) / 30)
         ser = serial.Serial('/dev/ttyACM0', 9600)
-        data = eval(ser.readline())
+        data = ser.readline()
         yield 'data: %s\n\n' % data
 
 
