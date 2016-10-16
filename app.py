@@ -12,6 +12,7 @@ app = Flask(__name__)
 
 def event_stream():
     while True:
+        gevent.sleep(1/30)
         yield 'data: %s\n\n' %\
             {'position': get_position(), 'rotation': get_rotation()}
 
